@@ -1,9 +1,19 @@
-import React from 'react'
+import { getUserOnboardingStatus } from '@/actions/user';
+import { redirect } from 'next/navigation'; // ✅ Correct import
+import React from 'react';
 
-const Dashboard = () => {
+const Dashboard = async () => {
+  const { isOnboarded } = await getUserOnboardingStatus();
+
+  if (!isOnboarded) {
+    redirect("/onboarding"); // ✅ This stops execution
+  }
+
   return (
-    <div>Dashboard</div>
-  )
-}
+    <main>
+      <div>Dashboard</div>
+    </main>
+  );
+};
 
-export default Dashboard
+export default Dashboard;
