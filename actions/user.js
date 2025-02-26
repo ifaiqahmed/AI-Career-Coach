@@ -30,11 +30,11 @@ export async function updateUser(data) {
           industryInsight = await tx.industryInsight.create({
             data: {
               industry: data.industry,
-              salaryRange: [],
+              salaryRanges: [],
               growthRate: 0,
-              demandLevel: "Medium",
+              demandLevel: "MEDIUM",
               topSkills: [],
-              marketOutlook: "Neutral",
+              marketOutlook: "NEUTRAL",
               keyTrends: [],
               recommendedSkills: [],
               nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days later
@@ -62,10 +62,10 @@ export async function updateUser(data) {
       }
     );
 
-    return result.updatedUser; // ✅ Correct return value
+    return {success:true,...result}; // ✅ Correct return value
   } catch (error) {
     console.error(error.message);
-    throw new Error("Failed to update user"); // ✅ Added error handling
+    throw new Error("Failed to update user"+error.message); // ✅ Added error handling
   }
 }
 
